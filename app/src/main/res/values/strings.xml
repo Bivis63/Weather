@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Weather</string>
+    <string name="navigatiom_item_weather">Погода</string>
+    <string name="navigatiom_item_news">Новости</string>
+    <string name="navigatiom_item_gallery">Галерея</string>
+
+    <string name="evaluate">ОЦЕНИТЬ</string>
+    <string name="make_a_new_request">СДЕЛАТЬ НОВЫЙ ЗАПРОС</string>
+    <string name="requests">Здесь появятся ваши предыдущие запросы</string>
+    <string name="recently_searched">Недавно вы искали</string>
+    <string name="city">Город</string>
+    <string name="temperature">"Температура (°C)"</string>
 </resources>
