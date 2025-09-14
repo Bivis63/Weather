@@ -117,10 +117,9 @@ fun WeatherScreen(viewModel: WeatherViewModel = viewModel()) {
                 Button(
                     onClick = {
                         when (uiState.buttonState) {
-                            is WeatherButtonState.EvaluateDisabled,
-                            is WeatherButtonState.EvaluateEnabled -> viewModel.addCurrentRequest()
-
-                            WeatherButtonState.NewRequest -> viewModel.resetRequest()
+                             WeatherButtonState.EvaluateDisabled,
+                             WeatherButtonState.EvaluateEnabled -> viewModel.addCurrentRequest()
+                             WeatherButtonState.NewRequest -> viewModel.resetRequest()
                         }
 
                     },
