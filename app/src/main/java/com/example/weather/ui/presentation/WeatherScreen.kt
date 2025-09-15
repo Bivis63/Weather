@@ -3,6 +3,7 @@ package com.example.weather.ui.presentation
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -117,9 +118,10 @@ fun WeatherScreen(viewModel: WeatherViewModel = viewModel()) {
                 Button(
                     onClick = {
                         when (uiState.buttonState) {
-                             WeatherButtonState.EvaluateDisabled,
-                             WeatherButtonState.EvaluateEnabled -> viewModel.addCurrentRequest()
-                             WeatherButtonState.NewRequest -> viewModel.resetRequest()
+                            WeatherButtonState.EvaluateDisabled,
+                            WeatherButtonState.EvaluateEnabled -> viewModel.addCurrentRequest()
+
+                            WeatherButtonState.NewRequest -> viewModel.resetRequest()
                         }
 
                     },
@@ -186,7 +188,17 @@ fun WeatherCard(city: String, temperature: String, showDescription: Boolean = fa
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Text(city.uppercase(), color = WeatherCardText)
+            Box(
+                modifier = Modifier
+                    .border(
+                        width = 1.dp,
+                        color = BorderColorDefault,
+                        shape = RoundedCornerShape(4.dp)
+                    )
+                    .padding(horizontal = 8.dp, vertical = 4.dp)
+            ) {
+                Text(city.uppercase(), color = WeatherCardText)
+            }
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(
                     painterResource(R.drawable.icon_temp),
