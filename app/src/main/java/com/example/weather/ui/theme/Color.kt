@@ -29,3 +29,6 @@ val WeatherCardBackground = Color(0xFF1A1A1A)
 val WeatherCardText = Color(0xFFE5E5E5)
 
 val BorderColorDefault = Color(0xFF343434)
+val IsSelected = Color(0xFF343434)
+
+val TextDescriptionColor = Color(0xFFD7D7D7)
