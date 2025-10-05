@@ -2,7 +2,7 @@
     <string name="app_name">Weather</string>
     <string name="navigatiom_item_weather">Погода</string>
     <string name="navigatiom_item_news">Новости</string>
-    <string name="navigatiom_item_gallery">Галерея</string>
+    <string name="navigatiom_item_gallery">Избранное</string>
 
     <string name="evaluate">ОЦЕНИТЬ</string>
     <string name="make_a_new_request">СДЕЛАТЬ НОВЫЙ ЗАПРОС</string>
@@ -10,4 +10,6 @@
     <string name="recently_searched">Недавно вы искали</string>
     <string name="city">Город</string>
     <string name="temperature">"Температура (°C)"</string>
+    <string name="favorite_news">Избранные новости</string>
+    <string name="close">Закрыть</string>
 </resources>
