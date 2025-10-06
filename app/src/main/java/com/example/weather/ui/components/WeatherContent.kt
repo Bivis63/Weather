@@ -215,7 +215,7 @@ fun WeatherCard(
             )
             Text(
                 "Сейчас в ${city.cityToPrepositional()} ${
-                    temperature.toInt().toWeatherDescription()
+                    temperature.toIntOrNull()?.toWeatherDescription()
                 }",
                 color = Color.White
             )

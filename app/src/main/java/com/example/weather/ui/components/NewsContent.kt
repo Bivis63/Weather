@@ -50,7 +50,6 @@ import com.example.weather.ui.theme.TextDescriptionColor
 import com.example.weather.ui.theme.WeatherCardBackground
 import com.example.weather.ui.theme.WeatherCardText
 
-
 @Composable
 fun NewsContent(
     component: NewsComponent,
@@ -270,7 +269,7 @@ fun NewsHeader(title: String, timeAgo: Int) {
                 contentDescription = null,
                 tint = WeatherCardText
             )
-            Spacer(modifier = Modifier.width(2.5.dp))
+            Spacer(modifier = Modifier.width(6.dp))
             Text(text = "$timeAgo минут назад", color = Color.White)
         }
     }

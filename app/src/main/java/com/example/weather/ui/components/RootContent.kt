@@ -23,6 +23,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.weather.R
+import com.example.weather.domain.model.Tab
 import com.example.weather.presentation.navigation.RootComponent
 import com.example.weather.ui.theme.BottomNavItemSelectedBackground
 
@@ -39,7 +40,7 @@ fun RootContent(
         containerColor = Color.Black,
         bottomBar = {
             BottomNavigationBar(
-                selectedIndex = selectedTab,
+                selectedIndex = selectedTab.index,
                 onWeatherClick = component::onWeatherTabClicked,
                 onNewsClick = component::onNewsTabClicked,
                 onFavoritesClick = component::onFavoritesTabClicked
@@ -52,17 +53,17 @@ fun RootContent(
                 .fillMaxSize()
         ) {
             when (selectedTab) {
-                0 -> WeatherContent(
+                Tab.WEATHER -> WeatherContent(
                     component = component.weatherComponent,
                     modifier = Modifier.fillMaxSize()
                 )
 
-                1 -> NewsContent(
+                Tab.NEWS -> NewsContent(
                     component = component.newsComponent,
                     modifier = Modifier.fillMaxSize()
                 )
 
-                2 -> FavoritesContent(
+                Tab.FAVORITE -> FavoritesContent(
                     component = component.favoritesComponent,
                     modifier = Modifier.fillMaxSize()
                 )

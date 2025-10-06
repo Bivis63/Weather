@@ -8,4 +8,6 @@ interface NewsRepository {
     fun getFavorite(): Flow<List<NewsItem>>
     suspend fun toggleRead(newsId: Int)
     suspend fun toggleLike(newsId: Int)
+    suspend fun isNewsEmpty(): Boolean
+    suspend fun initializeSampleData()
 }
