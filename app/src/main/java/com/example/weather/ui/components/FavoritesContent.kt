@@ -20,7 +20,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -86,9 +86,10 @@ fun FavoritesContent(
             )
         } else {
             LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                itemsIndexed(model.filteredFavorites, key = { _, news -> news.id }) { index, news ->
+                items(model.filteredFavorites, key = { it.id }) { news ->
                     AnimatedFavoriteCard(
                         news = news,
+                        liked = news.isLike,
                         onLikeClicked = { component.onLikeClicked(it) }
                     )
                 }
@@ -167,14 +168,15 @@ fun CardItem(
 @Composable
 fun AnimatedFavoriteCard(
     news: NewsItem,
+    liked: Boolean,
     onLikeClicked: (NewsItem) -> Unit,
     modifier: Modifier = Modifier
 ) {
     var visible by remember { mutableStateOf(true) }
-    var liked by remember { mutableStateOf(news.isLike) }
+    var localLiked by remember(liked) { mutableStateOf(liked) }
 
-    LaunchedEffect(liked) {
-        if (!liked) {
+    LaunchedEffect(localLiked) {
+        if (!localLiked) {
             delay(1000)
             visible = false
             delay(300)
@@ -192,8 +194,8 @@ fun AnimatedFavoriteCard(
             imageResId = news.imageResId,
             articleType = news.articleTitle,
             title = news.title,
-            isLike = liked,
-            onLikeClick = { liked = false }
+            isLike = localLiked,
+            onLikeClick = { localLiked = false }
         )
     }
 }
