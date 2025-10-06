@@ -1,5 +1,6 @@
 package com.example.weather.presentation.navigation
 
+import com.example.weather.domain.model.Tab
 import com.example.weather.presentation.favorites.FavoritesComponent
 import com.example.weather.presentation.news.NewsComponent
 import com.example.weather.presentation.weather.WeatherComponent
@@ -18,6 +19,6 @@ interface RootComponent {
 
     @Serializable
     data class Model(
-        val selectedTab: Int = 0
+        val selectedTab: Tab = Tab.WEATHER
     )
 }

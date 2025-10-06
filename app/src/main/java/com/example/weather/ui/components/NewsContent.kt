@@ -38,18 +38,21 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.arkivanov.decompose.defaultComponentContext
 import com.example.weather.R
 import com.example.weather.domain.model.NewsItem
+import com.example.weather.presentation.navigation.DefaultRootComponent
+import com.example.weather.presentation.navigation.RootComponent
 import com.example.weather.presentation.news.NewsComponent
 import com.example.weather.ui.theme.BorderColorDefault
 import com.example.weather.ui.theme.ButtonBackgroundDisabled
 import com.example.weather.ui.theme.TextDescriptionColor
 import com.example.weather.ui.theme.WeatherCardBackground
 import com.example.weather.ui.theme.WeatherCardText
-
 
 @Composable
 fun NewsContent(
@@ -270,7 +273,7 @@ fun NewsHeader(title: String, timeAgo: Int) {
                 contentDescription = null,
                 tint = WeatherCardText
             )
-            Spacer(modifier = Modifier.width(2.5.dp))
+            Spacer(modifier = Modifier.width(6.dp))
             Text(text = "$timeAgo минут назад", color = Color.White)
         }
     }

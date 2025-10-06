@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class DefaultWeatherComponent(
@@ -37,30 +38,35 @@ class DefaultWeatherComponent(
 
         getWeatherRequestsUseCase()
             .onEach { requests ->
-                val updatedModel = _model.value.copy(
-                    previousRequests = requests,
-                    currentRequest = requests.lastOrNull()
-                )
-                _model.value = updatedModel.copy(
-                    buttonState = computeButtonState(updatedModel)
-                )
-
+                _model.update { current ->
+                    val intermediate = current.copy(
+                        previousRequests = requests,
+                        currentRequest = requests.lastOrNull()
+                    )
+                    intermediate.copy(
+                        buttonState = computeButtonState(intermediate)
+                    )
+                }
             }
             .launchIn(scope)
     }
 
     override fun onCityChanged(city: String) {
-        _model.value = _model.value.copy(
-            city = city,
-            buttonState = computeButtonState(_model.value.copy(city = city))
-        )
+        _model.update { current ->
+            val intermediate = current.copy(city = city)
+            intermediate.copy(
+                buttonState = computeButtonState(intermediate)
+            )
+        }
     }
 
     override fun onTemperatureChanged(temperature: String) {
-        _model.value = _model.value.copy(
-            temperature = temperature,
-            buttonState = computeButtonState(_model.value.copy(temperature = temperature))
-        )
+        _model.update { current ->
+            val intermediate = current.copy(temperature = temperature)
+            intermediate.copy(
+                buttonState = computeButtonState(intermediate)
+            )
+        }
     }
 
     override fun onEvaluateClicked() {
@@ -73,12 +79,14 @@ class DefaultWeatherComponent(
     }
 
     override fun onNewRequestClicked() {
-        _model.value = _model.value.copy(
-            city = "",
-            temperature = "",
-            currentRequest = null,
-            buttonState = WeatherComponent.WeatherButtonState.EvaluateDisabled
-        )
+        _model.update {
+            it.copy(
+                city = "",
+                temperature = "",
+                currentRequest = null,
+                buttonState = WeatherComponent.WeatherButtonState.EvaluateDisabled
+            )
+        }
     }
 
     private fun computeButtonState(model: WeatherComponent.Model): WeatherComponent.WeatherButtonState {

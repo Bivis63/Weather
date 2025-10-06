@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 
@@ -39,16 +40,17 @@ class DefaultFavoritesComponent(
 
         getFavoritesUseCase()
             .onEach { favorites ->
-                val currentModel = _model.value
-                val filtered = if (currentModel.selectedChip == Category.ALL) {
-                    favorites
-                } else {
-                    favorites.filter { it.title == currentModel.selectedChip.displayName }
+                _model.update { current ->
+                    val filtered = if (current.selectedChip == Category.ALL) {
+                        favorites
+                    } else {
+                        favorites.filter { it.title == current.selectedChip.displayName }
+                    }
+                    current.copy(
+                        favorites = favorites,
+                        filteredFavorites = filtered
+                    )
                 }
-                _model.value = currentModel.copy(
-                    favorites = favorites,
-                    filteredFavorites = filtered
-                )
             }
             .launchIn(scope)
     }
@@ -60,16 +62,17 @@ class DefaultFavoritesComponent(
     }
 
     override fun onChipClicked(category: Category) {
-        val currentModel = _model.value
-        val filtered = if (category == Category.ALL) {
-            currentModel.favorites
-        } else {
-            currentModel.favorites.filter { it.title == category.displayName }
+        _model.update { current ->
+            val filtered = if (category == Category.ALL) {
+                current.favorites
+            } else {
+                current.favorites.filter { it.title == category.displayName }
+            }
+            current.copy(
+                selectedChip = category,
+                filteredFavorites = filtered
+            )
         }
-        _model.value = currentModel.copy(
-            selectedChip = category,
-            filteredFavorites = filtered
-        )
     }
 
     companion object {
